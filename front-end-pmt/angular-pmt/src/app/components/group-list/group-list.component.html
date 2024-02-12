@@ -1,0 +1,63 @@
+<div class="containers">
+    <br>
+    <div class="col-md-4" (click)="back()">&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-angle-left"
+            style="font-size:48px;color:black"></i>&nbsp;&nbsp;<span style="font-size: 30px;">Back</span></div>
+
+    <h1 align="center">Group</h1>
+    <div class="white-box">
+        <div class="col-md-12">
+            <div class="row">
+                <div class="col-md-10"></div>
+                <span class="btn btn-primary col-md-2" (click)="openModal('addGroup')">Add Group</span>
+            </div>
+            <table class="table">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">Group Name</th>
+                        <th scope="col">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let tempGroup of groups">
+                        <td><a [routerLink]="['/account-list',tempGroup.groupName]">{{tempGroup.groupName}}</a></td>
+                        <td> <span><i class="fa fa-eye"></i></span> &nbsp;&nbsp;
+                            <span (click)="updateData(tempGroup.groupName,tempGroup.id)"><i
+                                    class="fa fa-pencil"></i></span>
+                            &nbsp;&nbsp;
+                            <span (click)="deleteGroup(tempGroup)"><i class="fa fa-trash"></i></span>
+
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<ngx-smart-modal #addGroup [identifier]="'addGroup'">
+    <form #userGroup="ngForm" [formGroup]="groupAdd" (ngSubmit)="addGroupData(userGroup.value)">
+        <div class="row">
+            <label class="col-md-4">Group Name:</label>
+            <input type="text" class="col-md-6" formControlName="groupName" name="groupName" placeholder="Enter the Group Name"  />
+            <span *ngIf="groupNames.invalid && groupNames.touched"><em>Enter the valid Group</em></span>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-md-9"></div>
+            <button type="submit" class="col-md-3 btn btn-primary">Add Group</button>
+        </div>
+    </form>
+</ngx-smart-modal>
+<ngx-smart-modal #updateGroup [identifier]="'updateGroup'">
+    <form #update="ngForm" (ngSubmit)="updateGroupData(update.value)">
+        <div class="row">
+            <label class="col-md-4">Group Name:</label>
+            <input type="text" class="col-md-6" [(ngModel)]="groupName" name="groupName"
+                placeholder="Enter the Group Name" ngModel />
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-md-8"></div>
+            <button type="submit" class="col-md-4 btn btn-primary">Update Group</button>
+        </div>
+    </form>
+</ngx-smart-modal>

@@ -1,0 +1,25 @@
+<div class="wrapper fadeInDown">
+    <div id="formContent">
+      <!-- Tabs Titles -->
+  
+      <!-- Icon -->
+      <div class="fadeIn first">
+        <img src="assets/loginsvg.png" id="icon" alt="User Icon" />
+      </div>
+  
+      <!-- Login Form -->
+      <form #userLogin="ngForm" (ngSubmit)="loginData(userLogin.value)">
+        <input type="text" id="login" class="fadeIn second" name="userName" placeholder="username" ngModel>
+        <input type="password" id="password" class="fadeIn third" name="password" placeholder="password" ngModel>
+        <div><span *ngIf="invalidCred"><em>Invalid Credentials</em></span></div>
+        
+        <input type="submit" class="fadeIn fourth" value="Log In">
+      </form>
+  
+      <!-- Remind Passowrd -->
+      <div id="formFooter">
+        <a class="underlineHover" href="#">Forgot Password?</a>
+      </div>
+  
+    </div>
+  </div>

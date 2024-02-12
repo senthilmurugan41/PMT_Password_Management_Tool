@@ -1,0 +1,99 @@
+<div class="containers">
+    <br>
+    <div class="col-md-4" (click)="back()">&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-angle-left"
+        style="font-size:48px;color:black"></i>&nbsp;&nbsp;<span style="font-size: 30px;">Back</span></div>
+    <h1  align="center">{{value}}</h1>
+    <div class="white-box">
+        <div class="col-md-12">
+            <div class="row">
+                <div class="col-md-10"></div>
+                <span class="btn btn-primary col-md-2" (click)="openModal('addAccount')">Add Account</span>
+            </div>
+            <table class="table">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">Account Name</th>
+                        <th scope="col">Url</th>
+                        <th scope="col">Password</th>
+                        <th scope="col">Group</th>
+                        <th scope="col">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let tempAccount of accounts">
+                        <td>{{tempAccount.accountName}}</td>
+                        <td>{{tempAccount.url}}</td>
+                        <td>{{tempAccount.password}}</td>
+                        <td>{{tempAccount.groupName}}</td>
+                        <td><span (click)="updateData(tempAccount)"><i class="fa fa-pencil"></i></span>&nbsp;&nbsp;
+                            <span (click)="deleteData(tempAccount.id)"><i class="fa fa-trash"></i></span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<ngx-smart-modal #addAccount [identifier]="'addAccount'">
+    <form  #userAccount="ngForm" [formGroup]="accountAdd" (ngSubmit)="addAccountData(userAccount)">
+        <div class="row">
+            <label class="col-md-4">Account Name:</label>
+            <input type="text" class="col-md-6"  formControlName="accountName" name="accountName" placeholder="Enter the Account Name"  />
+            <span *ngIf="accountName.invalid && accountName.touched"><em>Enter the valid Account Name</em></span>
+        </div>
+        <br>
+        <div class="row">
+            <label class="col-md-4">Url:</label>
+            <input type="text" class="col-md-6" formControlName="url" name="url" placeholder="Enter the Url"  />
+            <span *ngIf="url.invalid && url.touched"><em>Enter the valid url</em></span>
+        </div>
+        <br>
+        <div class="row">
+            <label class="col-md-4">Password:</label>
+            <input type="password" class="col-md-6" formControlName="password" name="password" placeholder="Enter the password" />
+            <span *ngIf="password.invalid && password.touched"><em>Enter the password</em></span>
+        </div>
+        <br>
+        <div class="row">
+            <label class="col-md-4">Group Name:</label>
+            <input *ngIf="value1==false" type="text" class="col-md-6"  name="groupName" [(ngModel)]="value" [ngModelOptions]="{standalone: true}" readonly/>
+            <input *ngIf="value1==true" type="text" class="col-md-6"   name="groupName" formControlName="groupName"/>
+            <span *ngIf="groupName.invalid && groupName.touched"><em>Enter the valid Group Name</em></span>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-md-7"></div>
+            <button type="submit" class="col-md-5 btn btn-primary">Add Account</button>
+        </div>
+    </form>
+</ngx-smart-modal>
+<ngx-smart-modal #updateAccount [identifier]="'updateAccount'">
+    <form #userAccountUpdate="ngForm"  (ngSubmit)="updateAccountData(userAccountUpdate)">
+        <div class="row">
+            <label class="col-md-4">Account Name:</label>
+            <input type="text" class="col-md-6" [(ngModel)]="account.accountName" fromControlName="accountName" name="accountName" placeholder="Enter the Account Name" ngModel />
+            
+        </div>
+        <br>
+        <div class="row">
+            <label class="col-md-4">Url:</label>
+            <input type="text" class="col-md-6"  [(ngModel)]="account.url" name="url" placeholder="Enter the Url" ngModel />
+        </div>
+        <br>
+        <div class="row">
+            <label class="col-md-4">Password:</label>
+            <input type="password" class="col-md-6"  [(ngModel)]="account.password"  name="password" placeholder="Enter the password" ngModel />
+        </div>
+        <br>
+        <div class="row">
+            <label class="col-md-4">Group Name:</label>
+            <input *ngIf="value1==false" type="text" class="col-md-6"  name="groupName" [(ngModel)]="value" ngModel readonly/>
+            <input *ngIf="value1==true" type="text" class="col-md-6"  name="groupName" [(ngModel)]="account.groupName" ngModel />
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-md-7"></div>
+            <button type="submit" class="col-md-5 btn btn-primary">Update Account</button>
+        </div>
+    </form>
+</ngx-smart-modal>

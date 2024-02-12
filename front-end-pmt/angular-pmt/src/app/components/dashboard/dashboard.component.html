@@ -1,0 +1,27 @@
+<div class="containers">
+    <h1 align="center">Dash Board</h1>
+    <div class="white-box">
+        <div class="cards-list">
+
+            <div class="card 1" [routerLink]="['/account-list']" [queryParams]="{value:2}">
+                <div class="card_image"> <img src="https://i.redd.it/b3esnz5ra34y.jpg" /> </div>
+                <div class="card_title title-white">
+                    <p>Accounts</p>
+                    <div>{{accountCount}}</div>
+                </div>
+            </div>
+
+            <div class="card 2" routerLink="/group-list">
+                <div class="card_image">
+                    <img
+                        src="https://images.unsplash.com/photo-1506869640319-fe1a24fd76dc?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8Z3JvdXB8ZW58MHx8MHx8&w=1000&q=80"/>
+                </div>
+                <div class="card_title title-white">
+                    <p>Groups</p>
+                    <div>{{groupCount}}</div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
